@@ -12,6 +12,12 @@
 #include <input/processors.dtsi>
 
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 2400
+#define L_NUM 1
+#define L_MOD 2
+#define L_SYM 3
+#define L_MOU 4
+#define L_MO1 5
+#define L_MO2 6
 
 &mmv {
     acceleration-exponent = <1>;      // 1 = constant, 2 = exponential ramp-up
@@ -21,12 +27,12 @@
 
 &mmv_input_listener {
     precision_layer {
-        layers = <5>;
+        layers = <4>;
         input-processors = <&zip_xy_scaler 1 2>; 
     };
 
     precision_more {
-        layers = <4>;
+        layers = <5>;
         input-processors = <&zip_xy_scaler 1 4>;
     };
 };
@@ -43,17 +49,17 @@
             quick-tap-ms = <200>;
             hold-while-undecided;
         };
-        td1: tap_dance_1 {
+        td_NUM: tap_dance_1 {
         compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mo 1>, <&tog 1>;
+            bindings = <&mo L_NUM>, <&tog L_NUM>;
         };
-        td2: tap_dance_2 {
+        td_SYM: tap_dance_2 {
         compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mo 2>, <&tog 2>;
+            bindings = <&mo L_SYM>, <&tog L_SYM>;
         };
     };
 
@@ -62,26 +68,36 @@
 
         default_layer {
             bindings = <
-    &kp TAB   &kp Q  &kp W     &kp E     &kp R     &kp T                    &kp Y      &kp U     &kp I          &kp O    &kp P    &kp BSPC
-    &kp ESC   &kp A  &kp S     &kp D     &lt 3 F   &kp G                    &kp H      &kp J     &kp K          &kp L    &kp SEMI &kp ENTER
-    &kp LSHFT &kp Z  &kp X     &kp C     &kp V     &kp B                    &kp N      &kp M     &kp COMMA      &kp DOT  &kp FSLH &mt RSHFT SINGLE_QUOTE
-    &kp LCTRL &none  &kp LGUI  &kp LALT  &td1      &kp SPACE  &none  &none  &kp SPACE  &td2      &mt RCTRL LEFT &kp DOWN &kp UP   &kp RIGHT
-                               &none     &none     &none      &none  &none  &none      &none     &none
+    &kp TAB       &kp Q  &kp W     &kp E     &kp R       &kp T                    &kp Y      &kp U     &kp I          &kp O    &kp P    &kp BSPC
+    &lt L_MOD ESC &kp A  &kp S     &kp D     &lt L_MOU F &kp G                    &kp H      &kp J     &kp K          &kp L    &kp SEMI &kp ENTER
+    &kp LSHFT     &kp Z  &kp X     &kp C     &kp V       &kp B                    &kp N      &kp M     &kp COMMA      &kp DOT  &kp FSLH &mt RSHFT SINGLE_QUOTE
+    &kp LCTRL     &none  &kp LGUI  &kp LALT  &td_NUM     &kp SPACE  &none  &none  &kp SPACE  &td2      &mt RCTRL LEFT &kp DOWN &kp UP   &kp RIGHT
+    &none &none &none &none &none &none &none &none
             >;
         };
 
-        layer1 {
+        layer_mod {
+            bindings = <
+    &trans    &trans   &trans  &trans    &trans      &trans                      &trans    &trans   &trans  &trans    &trans      &trans                   
+    &trans    &trans   &trans  &trans    &trans      &trans                      &trans    &trans   &trans  &trans    &trans      &trans                   
+    &trans    &trans   &trans  &trans    &trans      &trans                      &trans    &trans   &trans  &trans    &trans      &trans                   
+    &trans    &trans   &trans  &trans    &trans      &kp LCTRL+LGUI  &none &none &trans    &trans   &trans  &trans    &trans      &trans                   
+    &none &none &none &none &none &none &none &none
+            >;
+        };
+
+        layer_number {
             bindings = <
     &kp GRAVE &kp F1  &kp F2  &kp F3    &kp F4  &kp F5                  &trans     &kp N7   &kp N8  &kp N9  &trans        &trans
     &trans    &kp F6  &kp F7  &kp F8    &kp F9  &kp F10                 &kp PLUS   &kp N4   &kp N5  &kp N6  &kp MINUS     &trans
     &trans    &kp F11 &kp F12 &kp PSCRN &kp SCROLLLOCK
                                                 &kp PAUSE_BREAK         &kp ASTRK  &kp N1   &kp N2  &kp N3  &kp KP_SLASH  &kp EQUAL
     &trans    &trans  &trans  &trans    &trans  &to 0     &none  &none  &trans     &kp N0   &kp N0  &kp DOT &kp COMMA     &kp ESC
-                              &none     &none   &none     &none  &none  &none      &none    &none
+    &none &none &none &none &none &none &none &none
             >;
         };
 
-        layer2 {
+        layer_symbol {
             bindings = <
     &kp TILDE &kp EXCL &kp AT  &kp HASH  &kp DOLLAR  &kp PRCNT                &kp CARET   &kp AMPS  &kp ASTRK  &kp LPAR  &kp RPAR  &kp DEL
     &trans    &trans   &trans  &trans    &trans      &trans                   &kp LC(Z)   &kp LC(X) &kp LC(C)  &kp LC(V) &kp LS(MINUS) &trans
@@ -92,35 +108,35 @@
                                                                                                                          &kp BACKSLASH     
                                                                                                                                    &kp LS(BACKSLASH)
     &trans    &trans   &trans  &trans    &to 0       &trans    &none  &none   &trans      &to 0     &kp HOME   &kp PG_UP &kp PG_DN &kp END 
-                               &none     &none       &none     &none  &none   &none       &none     &none
+    &none &none &none &none &none &none &none &none
             >;
         };
 
-        layer3 { // mouse layer - normal
+        layer_mouse { 
             bindings = <
     &trans    &none   &none  &msc SCRL_UP      &none     &none                    &msc SCRL_UP    &none            &mmv MOVE_UP    &none           &none     &trans 
     &trans    &none   &none  &msc SCRL_DOWN    &to 0     &none                    &msc SCRL_DOWN  &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_RIGHT &none     &trans 
     &trans    &none   &none  &none             &none     &none                    &none           &none            &none           &none           &none     &trans 
-    &trans    &trans  &trans &trans            &mkp MB2  &mkp MB1  &none  &none   &mo 5           &mo 4            &trans          &trans          &trans    &trans 
-                             &none             &none     &none     &none  &none   &none           &none            &none
+    &trans    &trans  &trans &trans            &mkp MB2  &mkp MB1  &none  &none   &mo 4           &mo 5            &trans          &trans          &trans    &trans 
+    &none &none &none &none &none &none &none &none
             >;
         };
-        layer4 {
+        layer_mouse1 {
             bindings = <
     &trans    &trans   &trans  &trans    &trans      &trans             &trans    &trans   &trans  &trans    &trans      &trans                   
     &trans    &trans   &trans  &trans    &trans      &trans             &trans    &trans   &trans  &trans    &trans      &trans                   
     &trans    &trans   &trans  &trans    &trans      &trans             &trans    &trans   &trans  &trans    &trans      &trans                   
     &trans    &trans   &trans  &trans    &trans      &trans &none &none &trans    &trans   &trans  &trans    &trans      &trans                   
-                               &none     &none       &none  &none &none &none     &none    &none
+    &none &none &none &none &none &none &none &none
             >;
         };
-        layer5 { 
+        layer_mouse2 { 
             bindings = <
     &trans    &trans   &trans  &trans    &trans      &trans             &trans    &trans   &trans  &trans    &trans      &trans                   
     &trans    &trans   &trans  &trans    &trans      &trans             &trans    &trans   &trans  &trans    &trans      &trans                   
     &trans    &trans   &trans  &trans    &trans      &trans             &trans    &trans   &trans  &trans    &trans      &trans                   
     &trans    &trans   &trans  &trans    &trans      &trans &none &none &trans    &trans   &trans  &trans    &trans      &trans                   
-                               &none     &none       &none  &none &none &none     &none    &none
+    &none &none &none &none &none &none &none &none
             >;
         };
         
