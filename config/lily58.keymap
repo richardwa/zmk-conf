@@ -71,7 +71,7 @@
     &kp TAB       &kp Q  &kp W     &kp E     &kp R       &kp T                    &kp Y      &kp U     &kp I          &kp O    &kp P    &kp BSPC
     &lt L_MOD ESC &kp A  &kp S     &kp D     &lt L_MOU F &kp G                    &kp H      &kp J     &kp K          &kp L    &kp SEMI &kp ENTER
     &kp LSHFT     &kp Z  &kp X     &kp C     &kp V       &kp B                    &kp N      &kp M     &kp COMMA      &kp DOT  &kp FSLH &mt RSHFT SINGLE_QUOTE
-    &kp LCTRL     &none  &kp LGUI  &kp LALT  &td_NUM     &kp SPACE  &none  &none  &kp SPACE  &td2      &mt RCTRL LEFT &kp DOWN &kp UP   &kp RIGHT
+    &kp LCTRL     &none  &kp LGUI  &kp LALT  &td_NUM     &kp SPACE  &none  &none  &kp SPACE  &td_SYM   &mt RCTRL LEFT &kp DOWN &kp UP   &kp RIGHT
     &none &none &none &none &none &none &none &none
             >;
         };
