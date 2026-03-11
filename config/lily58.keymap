@@ -81,7 +81,7 @@
     &trans    &trans   &trans  &trans    &trans      &trans                      &trans    &trans   &trans  &trans    &trans      &trans                   
     &trans    &trans   &trans  &trans    &trans      &trans                      &trans    &trans   &trans  &trans    &trans      &trans                   
     &trans    &trans   &trans  &trans    &trans      &trans                      &trans    &trans   &trans  &trans    &trans      &trans                   
-    &trans    &trans   &trans  &trans    &trans      &kp LCTRL+LGUI  &none &none &trans    &trans   &trans  &trans    &trans      &trans                   
+    &trans    &trans   &trans  &trans    &kp LGUI    &kp LC(LGUI)  &none &none &trans    &trans   &trans  &trans    &trans      &trans
     &none &none &none &none &none &none &none &none
             >;
         };
