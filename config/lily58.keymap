@@ -12,12 +12,11 @@
 #include <input/processors.dtsi>
 
 #define ZMK_POINTING_DEFAULT_MOVE_VAL 2400
-#define L_MOD 1
-#define L_NUM 2
-#define L_SYM 3
-#define L_MOU 4
-#define L_MO1 5
-#define L_MO2 6
+#define L_NUM 1
+#define L_SYM 2
+#define L_MOU 3
+#define L_MO1 4
+#define L_MO2 5
 
 &mmv {
     acceleration-exponent = <2>;      // 1 = constant, 2 = exponential ramp-up
@@ -49,18 +48,6 @@
             quick-tap-ms = <200>;
             hold-while-undecided;
         };
-        td_NUM: tap_dance_1 {
-        compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&mo L_NUM>, <&tog L_NUM>;
-        };
-        td_SYM: tap_dance_2 {
-        compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&mo L_SYM>, <&tog L_SYM>;
-        };
     };
 
     keymap {
@@ -68,20 +55,10 @@
 
         default_layer {
             bindings = <
-    &kp TAB       &kp Q  &kp W     &kp E     &kp R       &kp T                    &kp Y      &kp U     &kp I          &kp O    &kp P    &kp BSPC
-    &lt L_MOD ESC &kp A  &kp S     &kp D     &lt L_MOU F &kp G                    &kp H      &kp J     &kp K          &kp L    &kp SEMI &kp ENTER
-    &kp LSHFT     &kp Z  &kp X     &kp C     &kp V       &kp B                    &kp N      &kp M     &kp COMMA      &kp DOT  &kp FSLH &mt RSHFT SINGLE_QUOTE
-    &kp LCTRL     &none  &kp LGUI  &kp LALT  &td_NUM     &kp SPACE  &none  &none  &kp SPACE  &td_SYM   &mt RCTRL LEFT &kp DOWN &kp UP   &kp RIGHT
-    &none &none &none &none &none &none &none &none
-            >;
-        };
-
-        layer_mod {
-            bindings = <
-    &trans    &trans   &trans  &trans    &trans      &trans                      &trans    &trans   &trans  &trans    &trans      &trans                   
-    &trans    &trans   &trans  &trans    &trans      &trans                      &trans    &trans   &trans  &trans    &trans      &trans                   
-    &trans    &trans   &trans  &trans    &trans      &trans                      &trans    &trans   &trans  &trans    &trans      &trans                   
-    &trans    &trans   &trans  &trans    &kp LGUI    &kp LC(LGUI)  &none &none   &trans    &trans   &trans  &trans    &trans      &trans
+    &kp TAB       &kp Q  &kp W     &kp E     &kp R       &kp T                         &kp Y      &kp U     &kp I          &kp O    &kp P    &kp BSPC
+    &mt LCTRL ESC &kp A  &kp S     &kp D     &lt L_MOU F &lt L_NUM G                   &kp H      &kp J     &kp K          &kp L    &kp SEMI &kp ENTER
+    &kp LSHFT     &kp Z  &kp X     &kp C     &kp V       &kp B                         &kp N      &kp M     &kp COMMA      &kp DOT  &kp FSLH &mt RSHFT SINGLE_QUOTE
+    &none         &none  &none     &none     &kp LGUI    &mt LALT SPACE  &none  &none  &kp SPACE  &mo L_SYM &mt RCTRL LEFT &kp DOWN &kp UP   &kp RIGHT
     &none &none &none &none &none &none &none &none
             >;
         };
