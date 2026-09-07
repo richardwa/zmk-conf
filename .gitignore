@@ -1,2 +1,4 @@
-.zmk/
+build/cache/
+build/output/
+build/*.log
 .idea
