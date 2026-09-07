@@ -15,7 +15,7 @@ log=build/build.log
 echo "==> Building ZMK firmware (log: $log)"
 podman run --rm \
   -v "$PWD":/workspaces/zmk-config:Z \
-  zmkfirmware/zmk-build-arm:stable \
+  docker.io/zmkfirmware/zmk-build-arm:stable \
   bash /workspaces/zmk-config/build/container.sh "$@" 2>&1 | tee "$log"
 
 echo "==> Firmware:"

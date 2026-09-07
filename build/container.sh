@@ -18,6 +18,7 @@ cp -R "$repo/$config_path/." "$base_dir/$config_path/"
 if [ ! -e "$base_dir/.west" ]; then
   west init -l "$base_dir/$config_path"
 fi
+cd "$base_dir"
 west update --fetch-opt=--filter=tree:0
 west zephyr-export
 
@@ -44,8 +45,6 @@ build_one() {
     fi
   done
 }
-
-cd "$base_dir"
 
 if [ $# -ge 1 ]; then
   build_one "$1" "${2:-}"
